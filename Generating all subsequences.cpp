@@ -57,3 +57,29 @@ int main(){
     vector<int> dp;
     solve(0,0, nums, dp, nums.size(), 9);
 }
+
+
+// now to get count how many subsequences are there making target
+
+#include<bits/stdc++.h>
+using namespace std;
+int solve(int ind, int sum,vector<int>& nums, int n, int target){
+    if(ind == n){
+        if(sum == target){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    sum += nums[ind];
+    int l = solve(ind+1, sum, nums, n, target);
+    sum -= nums[ind];
+    int r= solve(ind+1, sum, nums, n, target);
+    return l+r;
+}
+int main(){
+    vector<int> nums = {1,2,3,4,5};
+    vector<int> dp;
+    cout<<solve(0,0, nums, nums.size(), 9);
+}
